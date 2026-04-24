@@ -65,10 +65,15 @@ ICON_CHART_UP       = "\U0001F4C8"  # 📈 chart increasing
 ICON_CHART_DOWN     = "\U0001F4C9"  # 📉 chart decreasing
 ICON_DASHBOARD      = "\U0001F4F1"  # 📱 (use for UI/dashboard context)
 ICON_FILTER         = "\U0001F4CB"  # 📋 (repurpose as filter label)
+ICON_BROOM          = "\U0001F9F9"  # 🧹 broom
 ICON_TAG            = "\U0001F3F7\uFE0F"  # 🏷️ label / tag
 ICON_BELL           = "\U0001F514"  # 🔔 bell / notification
 ICON_STAR           = "\U00002B50"  # ⭐ star
 ICON_TROPHY         = "\U0001F3C6"  # 🏆 trophy
+ICON_ARROW_LEFT     = "\U00002B05\uFE0F"  # ⬅️ left arrow
+ICON_ARROW_RIGHT    = "\U000027A1\uFE0F"  # ➡️ right arrow
+ICON_ARROW_UP       = "\U00002B06\uFE0F"  # ⬆️ up arrow
+ICON_ARROW_DOWN     = "\U00002B07\uFE0F"  # ⬇️ down arrow
 
 # ── People / Roles ────────────────────────────────────────────────────────────
 ICON_PERSON         = "\U0001F464"  # 👤 person silhouette

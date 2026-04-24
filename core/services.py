@@ -43,3 +43,9 @@ class DocumentService:
         )
        
         self.repo.add_document(document)
+
+    def search_documents(self, tag=None, lecture_date=None):
+        return self.repo.search_documents(tag, lecture_date)
+    
+    def get_all_documents(self):
+        return self.repo.get_all_documents()
