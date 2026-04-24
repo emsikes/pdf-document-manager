@@ -181,7 +181,17 @@ The app should be restarted after a reset.
 
 ## Roadmap
 
-- [ ] Analytics dashboard (upload trends, tag frequency, reading progress)
+- [x] PDF upload with timestamp naming
+- [x] Thumbnail generation on upload
+- [x] Full page extraction to PNG images
+- [x] Metadata capture (tags, description, lecture date, upload date)
+- [x] SQLite persistence
+- [x] Search and filter by tags and lecture date
+- [x] Document viewer with page-by-page navigation
+- [x] Reading progress tracking
+- [x] Clickstream analytics (page visits, app events, unique pages viewed)
+- [x] Password-protected admin panel with database and storage reset
+- [x] Analytics dashboard UI (app event bar chart, per-document reading progress table)
 - [ ] Bulk upload support
 - [ ] Export / delete individual documents
 - [ ] Full-text search across descriptions and tags
