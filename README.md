@@ -16,8 +16,10 @@ A Streamlit-based PDF document management portal with upload, thumbnail generati
 - **Page Extraction** — all PDF pages converted to high-resolution PNG images (2x matrix)
 - **Metadata** — tags, description, lecture date, and upload date captured per document
 - **SQLite Storage** — lightweight local database, zero configuration required
-- **Search & View** *(coming soon)*
-- **Analytics** *(coming soon)*
+- **Search & View** — search documents by tag and lecture date, open in built-in reader
+- **Document Reader** — page-by-page navigation with progress tracking
+- **Clickstream Analytics** — page visit tracking, unique pages viewed, app event logging
+- **Admin Panel** — password-protected database and storage reset
 
 ---
 
@@ -28,6 +30,7 @@ document-manager/
 ├── app/
 │   └── main.py               # Streamlit entry point
 ├── core/
+│   ├── analytics.py          # Clickstream analytics service
 │   ├── file_manager.py       # File saving with timestamp naming
 │   ├── models.py             # Document dataclass
 │   ├── reader.py             # PDF → PNG page extraction (PyMuPDF)
@@ -56,8 +59,20 @@ document-manager/
 |---|---|
 | [Streamlit](https://streamlit.io) | Web UI framework |
 | [PyMuPDF](https://pymupdf.readthedocs.io) | PDF parsing, thumbnail and image extraction |
+| [pandas](https://pandas.pydata.org) | Data handling for analytics |
+| [python-dotenv](https://pypi.org/project/python-dotenv/) | Environment variable management |
 | `sqlite3` | Local database (stdlib) |
 | `datetime`, `os` | File management and timestamps (stdlib) |
+
+---
+
+## Environment Variables
+
+Create a `.env` file in the project root:
+
+```
+ADMIN_PASSWORD=yourpassword
+```
 
 ---
 
@@ -134,14 +149,39 @@ CREATE TABLE documents (
     lecture_date   TEXT,
     total_pages    INTEGER
 );
+
+CREATE TABLE page_visits (
+    id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    document_id   INTEGER,
+    page_number   INTEGER,
+    timestamp     TEXT
+);
+
+CREATE TABLE app_visits (
+    id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    event_type    TEXT,
+    timestamp     TEXT
+);
 ```
+
+---
+
+## Admin Panel
+
+The admin panel is accessible from the main page. It requires a password set via the `ADMIN_PASSWORD` environment variable. A confirmed reset will:
+
+- Delete `data/documents.db`
+- Wipe all files under `storage/pdfs/` and `storage/thumbnails/`
+- Recreate empty storage directories
+- Clear all analytics data
+
+The app should be restarted after a reset.
 
 ---
 
 ## Roadmap
 
-- [ ] Search and filter by tags, date, description
-- [ ] Document viewer (page-by-page image display)
-- [ ] Analytics dashboard (upload trends, tag frequency)
+- [ ] Analytics dashboard (upload trends, tag frequency, reading progress)
 - [ ] Bulk upload support
-- [ ] Export / delete documents
+- [ ] Export / delete individual documents
+- [ ] Full-text search across descriptions and tags
